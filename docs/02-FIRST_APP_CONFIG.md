@@ -69,4 +69,6 @@ def home(request):
 5. créer le template `client/templates/home.html`
 
 
+6. thème de l'application
+
 
