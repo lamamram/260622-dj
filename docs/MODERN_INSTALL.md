@@ -68,4 +68,15 @@ sqlit
 # taper entrée pour exécuter la requête
 ```
 
+## usages avec git
+
+```bash
+# ajouter un fichier .bash_profile dans votre dossier utilisateur
+test -f ~/.bashrc && source ~/.bashrc
+```
+
+```bash
+# ajouter un fichier .bashrc dans votre dossier utilisateur
+alias sync='git checkout main && git pull'
+```
 
