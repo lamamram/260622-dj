@@ -49,6 +49,9 @@ uv run python manage.py migrate
 
 # ajouter une utilisateur admin: admin / me@example.com / roottoor
 uv run python manage.py createsuperuser
+
+# lancer le serveur de développement
+# demander l'url http://127.0.1:8000/admin/ pour accéder à l'interface d'administration de django
 ```
 
 ## utilisation de sqlit-tui pour gérer la base de données sqlite3
