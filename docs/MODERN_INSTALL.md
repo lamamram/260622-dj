@@ -52,6 +52,11 @@ uv run python manage.py createsuperuser
 
 # lancer le serveur de développement
 # demander l'url http://127.0.1:8000/admin/ pour accéder à l'interface d'administration de django
+
+## un projet django est composé de plusieurs applications
+# première application: client
+cd bank_app
+uv run python ../manage.py startapp client
 ```
 
 ## utilisation de sqlit-tui pour gérer la base de données sqlite3
@@ -81,5 +86,6 @@ test -f ~/.bashrc && source ~/.bashrc
 ```bash
 # ajouter un fichier .bashrc dans votre dossier utilisateur
 alias sync='git checkout main && git pull && git checkout -'
+alias override='git checkout main && git pull && git checkout - && git merge -X theirs main'
 ```
 
