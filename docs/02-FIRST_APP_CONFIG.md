@@ -71,4 +71,20 @@ def home(request):
 
 6. thème de l'application
 
+* vérifier que les fichiers statiques sont bien configurés dans les settings du projet
+```python
+# bank_app/settings.py
+# ...
+STATIC_URL = 'static/'
+```
+
+* créer le sous dossier static dans l'application client et y insérer les fichiers statiques (css, js, images)
+
+* injecter les fichiers statiques dans le template home.html
+```html
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<script src="{% static 'js/script.js' %}"></script>
+```
+
 
