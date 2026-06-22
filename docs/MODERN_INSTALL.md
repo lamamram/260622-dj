@@ -30,9 +30,19 @@ uv sync --project .
 5. lancer le projet et piloter python avec uv
 
 ```bash
+# créer le projet django dans le répertoire courant
 uv run django-admin startproject bank_app .
+# vérifier l'installation
 uv run python manage.py check
+# lancer le serveur de développement
 uv run python manage.py runserver
+
+# lancer une première migration => création de tables dans la base de données
+# Par défaut; django utilise sqlite3, et utilise des tables auth_user, auth_group, etc... pour gérer les utilisateurs et les groupes d'utilisateurs
+uv run python manage.py migrate 
+
+# ajouter une utilisateur admin: admin / me@example.com / roottoor
+uv run python manage.py createsuperuser
 ```
 
 
