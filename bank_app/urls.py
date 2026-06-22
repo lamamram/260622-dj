@@ -15,8 +15,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+# importer include pour importer un chemin python en str à partir de la racine
+from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # chemins de l'application client: chemin dans l'url, chemin python vers les urls de l'application
+    path("", include("bank_app.client.urls"))
+    # path("manager/")
 ]

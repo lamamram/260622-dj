@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    ## déclaration des applications que le projet utilisent
+    'bank_app.client'
 ]
 
 MIDDLEWARE = [
