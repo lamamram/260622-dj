@@ -27,3 +27,12 @@ uv add --group prod gunicorn
 uv sync --project .
 ```
 
+5. lancer le projet et piloter python avec uv
+
+```bash
+uv run django-admin startproject bank_app .
+uv run python manage.py check
+uv run python manage.py runserver
+```
+
+
