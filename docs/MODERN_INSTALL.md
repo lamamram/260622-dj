@@ -77,6 +77,6 @@ test -f ~/.bashrc && source ~/.bashrc
 
 ```bash
 # ajouter un fichier .bashrc dans votre dossier utilisateur
-alias sync='git checkout main && git pull'
+alias sync='git checkout main && git pull && git checkout -'
 ```
 
