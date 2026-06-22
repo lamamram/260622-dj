@@ -15,3 +15,15 @@
   - `uv tool install sqlit-tui`
   - REM: tool non lié à l'environnement du projet, mais à l'utilisateur
   - REM: sqlit ne veut pas dire sqlite, il permet de gérer différentes bases relationnelles
+
+4. ajouter des dépendances et créer l'environnement du projet
+```bash
+## chercher les dépendances existantes de pip (legacy)
+uv add -r requirements.txt
+## ajouter des deps de pour développement et / ou de production
+uv add --group dev django-debug-toolbar pytest-django
+uv add --group prod gunicorn
+## synchroniser les dépendances de l'environnement demandé (par défaut dev)
+uv sync --project .
+```
+
