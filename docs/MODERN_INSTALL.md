@@ -37,12 +37,35 @@ uv run python manage.py check
 # lancer le serveur de développement
 uv run python manage.py runserver
 
+
+## au cas où la base de données est corrompue
+# supprimer le fichier db.sqlite3
+# makemigrations => création les fichiers de migration et créer la base de données s'il n'existe pas (RAZ)
+uv run python manage.py makemigrations
+
 # lancer une première migration => création de tables dans la base de données
 # Par défaut; django utilise sqlite3, et utilise des tables auth_user, auth_group, etc... pour gérer les utilisateurs et les groupes d'utilisateurs
 uv run python manage.py migrate 
 
 # ajouter une utilisateur admin: admin / me@example.com / roottoor
 uv run python manage.py createsuperuser
+```
+
+## utilisation de sqlit-tui pour gérer la base de données sqlite3
+
+```bash
+sqlit
+# taper n => créer une nouvelle connexion
+# choisir le nom, le type, le chemin vers le fichier db.sqlite3
+
+# cliquer sur le cnx
+# voir les tables, les colonnes, les données, etc...
+
+# requêter: dans query
+# à la sauce vim: taper i pour mode insertion
+# ensuite taper la requête sql, ex: select * from auth_user;
+# taper ESC pour sortir du mode insertion
+# taper entrée pour exécuter la requête
 ```
 
 
