@@ -34,3 +34,6 @@
 6. créer un fichier **layout** `./templates/base.html` pour factoriser le squelette HTML commun à toutes les pages de l'application (header, footer, menu, etc.)
    - il faut aménager des zones de contenu dynamique dans le layout avec des blocs `{% block <nom_du_bloc> %}{% endblock %}` 
    - les templates affichés par les vues vont hériter `{% extends 'base.html' %}` du layout en insérant les structures et données paritculières dans ces blocs avec `{% block <nom_du_bloc> %} ... {% endblock %}`
+
+
+![witdh:600px](./images/layout.png)

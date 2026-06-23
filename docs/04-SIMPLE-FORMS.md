@@ -89,7 +89,18 @@
   * `{{ form.as_ul }}` pour afficher les champs du formulaire avec des balises `<li>`
 
 2. validation côté serveur
-   * les champs des modèles continennent des contraintes de validation générale (ex: `blank=False`, `null=False`, `unique=True`) ou particulière EmailField, URLField, etc. (regex de validation)
-   * on peut créer des validateurs personnalisés pour des contraintes de validation particulières (ex: `validate_even`, `validate_odd`, etc.)
-   * on peut créer des méthodes de validation personnalisées pour des contraintes de validation particulières (ex: `clean_<fieldname>`, `clean`)
+   * les champs des modèles contiennent des contraintes de validation **générale** 
+     - `null=False` 
+     - `blank=False` 
+     - `unique=True` 
+   
+   *  des champs de modèles **particuliers**: EmailField, URLField *valide une regex*
+
+   * on surcharger des méthodes de validation personnalisées pour un champs 
+     - `clean_<fieldname>()`: qui doit valider `self.cleaned_data['<fieldname>']` et lever une exception `ValidationError` si la validation échoue
+
+    * on peut également surcharger une méthode `clean()` pour valider des contraintes de validation **sur plusieurs champs à la fois** 
+      - ex: *mdp et confirmation du mdp*" 
+      - peut utilise des méthodes de validation de django comme `validate_slug`, `validate_odd`, etc.
+   
    
