@@ -13,7 +13,10 @@
                                 {% comment "utilisation de filtre pour décorer des valeurs venant de la vue" %}
                                 <strong> {{ client.firstname | capfirst }} {{ client.lastname | upper }} </strong><br>
                                 {% endcomment %}
-                                <strong> {{ client }} </strong> <a class="text-decoration-none" href="{% url "edit_client" %}"><i class="bi bi-vector-pen"></i></a><br> <!-- client est convertible en str grâce à sa méthode __str__ !!! -->
+                                <strong> {{ client }} </strong> <!-- client est convertible en str grâce à sa méthode __str__ !!! -->
+                                <a class="text-decoration-none" href="{% url "edit_client" %}"> <!-- le nom de la directive url est liée à l'attribut name="" de l'url -->
+                                    <i class="bi bi-vector-pen"></i>
+                                </a><br> 
 
                                 Email: {{ client.email }} <br>
                                 Mobile: {{ client.mobile }} <br>

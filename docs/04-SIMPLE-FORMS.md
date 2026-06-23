@@ -8,6 +8,7 @@
   - email doit matcher une regex de type email
 * quels messages de succès et d'erreur à afficher dans le template
 * comportement de la page en cas de succès: redirection vers la page d'accueil avec un message de succès
+* messages d'erreur en cas de validation échouée: affichage des messages d'erreur dans le template
 
 * structures html
 
@@ -51,3 +52,32 @@
     </div>
 </section>
 ```
+
+## cration d'un formulaire simple avec ModelForm
+
+* `./forms.py`: utilisation d'une sous classe Meta
+* vue avec formulaire:
+  - distinguer le traitement du formulaire (POST) et l'affichage du formulaire (GET)
+  - traiter le forumlaire verifier l'adéquation des données POST avec les contraintes du modèle et les contraintes de validation du formulaire => `form.is_valid()`
+  - utiliser `redirect(to=<url>)` pour redirection
+* template avec formulaire:
+  - forme simple `{{ form }}` moche
+  - obligation d'ajout un token csrf pour sécuriser le formulaire: `{% csrf_token %}`
+  - bouton de validation dans `<form>`
+
+```html
+<form method="post">
+...
+<div class="d-grid">
+   <button class="btn btn-primary btn-lg" type="submit">Save Changes</button>
+</div>
+</form>
+```
+
+* transition de lien: 
+```html
+<a class="text-decoration-none" href="{% url 'edit_client' %}">
+  <i class="bi bi-vector-pen"></i>
+</a>
+```
+
