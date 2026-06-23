@@ -1,5 +1,11 @@
 ## configuration d'une application django dans un projet django
 
+### design pattern MVT
+
+![alt text](./images/mvt.png)
+
+### "câblage"
+
 1. créer l'application
 ```bash
 ## un projet django est composé de plusieurs applications
@@ -47,7 +53,7 @@ from django.urls import path
 # "." chemin relatif à partir du fichier courant
 from . import views
 
-# app_name = "client" ===> pour les noms de vues dans les templates: {% url 'client:home' %}
+# app_name = "client" ===> pour les noms de urls dans les templates: {% url 'client:home' %}
 urlpatterns = [
     # chemin relatif à partir du radical de l'app client
     # charger la vue qui est une fonction dans le module views
