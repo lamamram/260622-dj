@@ -39,11 +39,16 @@
                             <h1 class="display-5 fw-bolder text-white mb-2">Welcome to Bank App</h1>
                             {% if client %}
                             <p class="lead text-white-50 mb-4">
-                                <strong> {{ client.firstname }} {{ client.lastname }} </strong><br>
+                                {% comment "utilisation de filtre pour décorer des valeurs venant de la vue" %}
+                                <strong> {{ client.firstname | capfirst }} {{ client.lastname | upper }} </strong><br>
+                                {% endcomment %}
+                                <strong> {{ client }} </strong><br> <!-- client est convertible en str grâce à sa méthode __str__ !!! -->
+
                                 Email: {{ client.email }} <br>
                                 Mobile: {{ client.mobile }} <br>
                             </p>
                             {% else %}
+                            <p class="lead text-white-50 mb-4">No client registered yet.</p>
                             {% endif %}
                             <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
                                 <a class="btn btn-primary btn-lg px-4 me-sm-3" href="#features">Get Started</a>

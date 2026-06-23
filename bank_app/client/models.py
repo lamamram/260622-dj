@@ -11,6 +11,7 @@ class Client(models.Model):
     email = models.EmailField(unique=True)
     mobile = models.CharField(max_length=20)
     # auto_now_add: le timestamp de ce champs est établi quand un objet est inséré dans la db
+    # REM default vs db_default: default est créé par Django, 
     # pour sqlite: db_default=Now() déléguer la valeur par défaut à la bdd 
     created_at = models.DateTimeField(db_default=Now())
 

@@ -11,4 +11,4 @@
 
 1. insérer un client en bdd: `INSERT INTO client_client (firstname, lastname, email, mobile) VALUES ('jean', 'Dupont', 'jdupont@example.com', '0904567824')`
    - describe avec sqlite: `PRAGMA table_info(client_client)`
-   - REM avec sqlit: dans query le <backsapce> permet de voir les commandes précéentes
+   - REM avec sqlit: dans query le <backspace> permet de voir les commandes précéentes
