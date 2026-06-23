@@ -1,9 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Client
+from .forms import EditClientForm
+from django.http import HttpRequest
 
 # Create your views here.
 # première vue : vue-fonction
-def home(request):
+def home(request: HttpRequest):
     # accès statique (pas d'instanciation) avec l'attribut .objects
     # qui contient les méthodes de requêtages sur la table
     # pk = Primary Key (clé primaire) ==> id
@@ -15,3 +17,25 @@ def home(request):
         # c'est la clé qui donne le nom à l'objet dans le template !!!
         "client": client
     })
+
+def edit_client(request: HttpRequest):
+    client = Client.objects.get(pk=1)
+    # si le formulaire est validé (requête HTTP POST/PUT/PATCH)
+    if request.method == "POST":
+        form = EditClientForm(
+            # données insérés par le client dans le formulaire
+            data=request.POST,
+            instance=client
+        )
+        if form.is_valid():
+            # mettre à jour les données du modèle client à partir
+            # des données du formulaire
+            form.save()
+            # rediriger vers la page d'accueil
+            return redirect(to="home")
+    else:
+        form = EditClientForm(instance=client)
+    return render(request, "edit_client.html", {"form": form})
+
+
+    # si on vient de la page d'accueil

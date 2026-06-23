@@ -13,7 +13,7 @@
                                 {% comment "utilisation de filtre pour décorer des valeurs venant de la vue" %}
                                 <strong> {{ client.firstname | capfirst }} {{ client.lastname | upper }} </strong><br>
                                 {% endcomment %}
-                                <strong> {{ client }} </strong><br> <!-- client est convertible en str grâce à sa méthode __str__ !!! -->
+                                <strong> {{ client }} </strong> <a class="text-decoration-none" href="{% url "edit_client" %}"><i class="bi bi-vector-pen"></i></a><br> <!-- client est convertible en str grâce à sa méthode __str__ !!! -->
 
                                 Email: {{ client.email }} <br>
                                 Mobile: {{ client.mobile }} <br>
