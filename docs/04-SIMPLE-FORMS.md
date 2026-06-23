@@ -81,9 +81,15 @@
 </a>
 ```
 
-### amélioration du formulaire avec des champs individuels
+## améliorations du formulaire
 
-* `{{ form.as_p }}` pour afficher les champs du formulaire avec des balises `<p>
-* `{{ form.as_table }}` pour afficher les champs du formulaire avec des balises `<tr>`
-* `{{ form.as_ul }}` pour afficher les champs du formulaire avec des balises `<li>`
+1. esthétique
+  * `{{ form.as_p }}` pour afficher les champs du formulaire avec des balises `<p>
+  * `{{ form.as_table }}` pour afficher les champs du formulaire avec des balises `<tr>`
+  * `{{ form.as_ul }}` pour afficher les champs du formulaire avec des balises `<li>`
 
+2. validation côté serveur
+   * les champs des modèles continennent des contraintes de validation générale (ex: `blank=False`, `null=False`, `unique=True`) ou particulière EmailField, URLField, etc. (regex de validation)
+   * on peut créer des validateurs personnalisés pour des contraintes de validation particulières (ex: `validate_even`, `validate_odd`, etc.)
+   * on peut créer des méthodes de validation personnalisées pour des contraintes de validation particulières (ex: `clean_<fieldname>`, `clean`)
+   
