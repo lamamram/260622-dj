@@ -47,7 +47,7 @@ from django.urls import path
 # "." chemin relatif à partir du fichier courant
 from . import views
 
-app_name = "client"
+# app_name = "client" ===> pour les noms de vues dans les templates: {% url 'client:home' %}
 urlpatterns = [
     # chemin relatif à partir du radical de l'app client
     # charger la vue qui est une fonction dans le module views
@@ -86,5 +86,9 @@ STATIC_URL = 'static/'
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
 <script src="{% static 'js/script.js' %}"></script>
 ```
+
+### schéma de l'application client
+
+![schéma de l'application client](./images/static_response.png)
 
 

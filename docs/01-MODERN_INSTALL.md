@@ -40,7 +40,7 @@ uv run python manage.py runserver
 
 ## au cas où la base de données est corrompue
 # supprimer le fichier db.sqlite3
-# makemigrations => création les fichiers de migration et créer la base de données s'il n'existe pas (RAZ)
+# makemigrations => création les fichiers de migration et créer la base de données si elle n'existe pas (RAZ)
 uv run python manage.py makemigrations
 
 # lancer une première migration => création de tables dans la base de données
