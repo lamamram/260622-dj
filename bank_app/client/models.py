@@ -8,6 +8,7 @@ class Client(models.Model):
     firstname = models.CharField(max_length=150)
     lastname = models.CharField(max_length=150)
     # lié à la contrainte d'intégrité d'unicité UNIQUE en SQL
+    # ajoute une contrainte sur la regex
     email = models.EmailField(unique=True)
     mobile = models.CharField(max_length=20)
     # auto_now_add: le timestamp de ce champs est établi quand un objet est inséré dans la db

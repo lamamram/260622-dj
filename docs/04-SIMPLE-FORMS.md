@@ -81,3 +81,9 @@
 </a>
 ```
 
+### amélioration du formulaire avec des champs individuels
+
+* `{{ form.as_p }}` pour afficher les champs du formulaire avec des balises `<p>
+* `{{ form.as_table }}` pour afficher les champs du formulaire avec des balises `<tr>`
+* `{{ form.as_ul }}` pour afficher les champs du formulaire avec des balises `<li>`
+
