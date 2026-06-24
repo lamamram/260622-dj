@@ -45,6 +45,7 @@ def edit_client(request: HttpRequest):
     # si on vient de la page d'accueil
 
 def list_accounts(request: HttpRequest):
-    client = Client.objects.first()
-    accounts = Account.objects.filter(client=client)
+    client = Client.objects.get(pk=1)
+    accounts = client.accounts.all() # <= .accounts vient du "related_name" de la FK du modèle
+    # accounts = Account.objects.filter(client=client)
     return render(request, "list_accounts.html", {"accounts": accounts})

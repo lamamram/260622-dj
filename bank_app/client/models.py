@@ -36,5 +36,10 @@ class Account(models.Model):
     overdraft = models.DecimalField(max_digits=11,decimal_places=2,default=0)
     credit_rate = models.DecimalField(max_digits=7,decimal_places=2,default=0)
     type = models.CharField(max_length=10,choices=Type.choices)
-    client = models.ForeignKey(to=Client, on_delete=models.SET_NULL, null=True)
+    client = models.ForeignKey(
+        to=Client, 
+        on_delete=models.SET_NULL, null=True,
+        # => permet d'utiliser client.accounts !!! 
+        related_name="accounts"
+    )
 
