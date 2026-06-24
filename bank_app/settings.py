@@ -41,6 +41,30 @@ INSTALLED_APPS = [
     'bank_app.client'
 ]
 
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+## stockage de log
+    "handlers": {
+        "file": {
+            "level": "DEBUG",
+            "class": "logging.FileHandler",
+            # chemin du fichier de log
+            "filename": "debug.log",
+        },
+    },
+## config de la collecte de logs
+    "loggers": {
+        "django": {
+            "handlers": ["file"],
+            # niveau minimum 
+            "level": "DEBUG",
+            # rend les prints dans la console
+            "propagate": True,
+        },
+    },
+}
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

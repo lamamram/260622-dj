@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Client
 from .forms import EditClientForm
 from django.http import HttpRequest
+from django.contrib import messages
 
 # Create your views here.
 # première vue : vue-fonction
@@ -31,8 +32,11 @@ def edit_client(request: HttpRequest):
             # mettre à jour les données du modèle client à partir
             # des données du formulaire
             form.save()
+            messages.success(request, "données mises à jour !")
             # rediriger vers la page d'accueil
             return redirect(to="home")
+        else:
+            messages.error(request, "checker les erreurs ci-dessous")
     else:
         form = EditClientForm(instance=client)
     return render(request, "edit_client.html", {"form": form})

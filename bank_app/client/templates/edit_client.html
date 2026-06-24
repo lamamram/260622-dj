@@ -21,13 +21,39 @@
     <div class="container px-5 my-5">
         <div class="row gx-5 justify-content-center">
             <div class="col-lg-6">
+                {% if messages %}
+                <div class="mb-4">
+                    {% for message in messages %}
+                    <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
                 <div class="card">
                     <div class="card-body p-5">
                        <form method="post">
                          {% csrf_token %}
+                         {% comment "formulaire simple" %}
                          {{ form.as_p }}
-                       <div class="d-grid">
-                          <button class="btn btn-primary btn-lg" type="submit">Save Changes</button>
+                         {% endcomment %}
+                         <p>
+                            <label for="{{ form.email.id_for_label }}">Email <span style="color: red">*</span></label>
+                            {{ form.email }}
+                            {% if form.email.errors %}
+                            <div class="text-danger small mt-1"> {{form.email.errors}} </div>
+                            {% endif %}
+                         <p>
+                         <p>
+                            <label for="{{ form.email.id_for_mobile }}">Mobile <span style="color: red">*</span></label>
+                            {{ form.mobile }}
+                            {% if form.mobile.errors %}
+                            <div class="text-danger small mt-1"> {{form.mobile.errors}} </div>
+                            {% endif %}
+                         <p>
+                        <div class="d-grid">
+                            <button class="btn btn-primary btn-lg" type="submit">Save Changes</button>
                         </div>
                        </form>
                     </div>

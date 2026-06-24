@@ -131,6 +131,23 @@
 ```
 
 
+4. <ins>squelette HTML personnalisé pour les champs/messages</ins>
+   * on peut traiter les champs du formulaire individuellement via `{{ form.<fieldname> }}`
+   * on peut traiter directement les erreurs du formulaire `{{ form.errors }}`
+   * on peut traiter les messages d'erreur pour chaque champ individuellement via `{{ form.<fieldname>.errors }}`
+
+```html
+<div class="form-floating mb-3">
+    <label for="">Email <span style="color: red">*</span></label>
+    <div class="text-danger small mt-1"></div>
+</div>
+<div class="form-floating mb-3">
+    <label for="">Mobile <span style="color: red">*</span></label>
+    <div class="text-danger small mt-1"></div>
+</div>
+```
+
+
 
 ![width:600px](./images/model-form.png)
    
