@@ -83,12 +83,12 @@
 
 ## améliorations du formulaire
 
-1. esthétique
+1. <ins>esthétique</ins>
   * `{{ form.as_p }}` pour afficher les champs du formulaire avec des balises `<p>
   * `{{ form.as_table }}` pour afficher les champs du formulaire avec des balises `<tr>`
   * `{{ form.as_ul }}` pour afficher les champs du formulaire avec des listes `<li>`
 
-2. validation côté serveur
+2. <ins>validation côté serveur</ins>
    * les champs des modèles contiennent des contraintes de validation **générale** 
      - `null=False` 
      - `blank=False` 
@@ -102,6 +102,34 @@
     * on peut également surcharger une méthode `clean()` pour valider des contraintes de validation **sur plusieurs champs à la fois** 
       - ex: *mdp et confirmation du mdp*" 
       - peut utilise des méthodes de validation de django comme `validate_slug`, `validate_odd`, etc.
+
+3. <ins>messages Flash</ins>
+   * messages flash pour afficher des messages *de succès ou d'erreur*
+   * dans le template, ou en redirection
+   * module `messages` dans la vue:
+      - `messages.success(request, "message")` 
+      - `messages.error(request, "message")`
+   * dans le template:
+     - `{% if messages %}` ...
+
+```html
+<!-- home.html-->
+<!-- Flash messages -->
+        <div class="container px-5 mt-4">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+```
+
+```html
+<div class="mb-4">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+</div>
+```
+
 
 
 ![width:600px](./images/model-form.png)
