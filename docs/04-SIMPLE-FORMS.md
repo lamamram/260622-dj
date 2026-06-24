@@ -55,7 +55,7 @@
 
 ## cration d'un formulaire simple avec ModelForm
 
-* `./forms.py`: utilisation d'une sous classe Meta
+* `./forms.py`: utilisation d'une sous classe Meta pour associer le modèle et les champs du formulaire à générer
 * vue avec formulaire:
   - distinguer le traitement du formulaire **(POST)** et l'affichage du formulaire **(GET)**
   - traiter le forumlaire verifier l'adéquation des données POST avec les contraintes du modèle et les contraintes de validation du formulaire => `form.is_valid()`
