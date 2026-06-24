@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Bank App - accounts{% endblock  %}
+{% block header %}
+<!-- Header-->
+        <header class="bg-dark py-5">
+            <div class="container px-5">
+                <div class="row gx-5 justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="text-center my-5">
+                            <h1 class="display-5 fw-bolder text-white mb-2"> display accounts</h1>
+                            <p class="lead text-white-50 mb-4"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+{% endblock %}
+{% block content %}
+<!-- Edit form section -->
+<section class="bg-light py-5">
+    <div class="container px-5 my-5">
+        <div class="row gx-5 justify-content-center">
+            <div class="col-lg-6">
+               
+                <div class="card">
+                    <div class="card-body p-5">
+                       <table>  
+                            <th>
+                                <td> number </td>
+                                <td> solde </td>
+                                <td> type </td>
+                             </th>
+                            {% for account in accounts %}
+                            <tr>
+                                <td> {{account.number}} </td>
+                                <td> {{account.balance}} </td>
+                                <td> {{account.type}} </td>
+ 
+ 
+                            </tr>
+                            {% endfor %}
+                       </table>
+                    </div>
+                </div>
+                <div class="text-center mt-3">
+                    <a href="{% url 'home' %}" class="text-decoration-none">
+                        <i class="bi bi-arrow-left"></i> Back to Home
+                   </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock  %}
+ 

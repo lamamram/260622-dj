@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Client
+from .models import Client, Account
 from .forms import EditClientForm
 from django.http import HttpRequest
 from django.contrib import messages
@@ -43,3 +43,8 @@ def edit_client(request: HttpRequest):
 
 
     # si on vient de la page d'accueil
+
+def list_accounts(request: HttpRequest):
+    client = Client.objects.first()
+    accounts = Account.objects.filter(client=client)
+    return render(request, "list_accounts.html", {"accounts": accounts})

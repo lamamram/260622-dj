@@ -25,3 +25,16 @@ class Client(models.Model):
     #     super().__init__(*args, **kwargs)
     #     self.age = age
     #     self.firstname = "jean"
+
+class Account(models.Model):
+    class Type(models.TextChoices):
+        CURRENT = "current","Courant"
+        SAVING = "saving","Livret d'Epargne"
+ 
+    number = models.CharField(max_length=20,unique=True)
+    balance = models.DecimalField(max_digits=11,decimal_places=2)
+    overdraft = models.DecimalField(max_digits=11,decimal_places=2,default=0)
+    credit_rate = models.DecimalField(max_digits=7,decimal_places=2,default=0)
+    type = models.CharField(max_length=10,choices=Type.choices)
+    client = models.ForeignKey(to=Client, on_delete=models.SET_NULL, null=True)
+
