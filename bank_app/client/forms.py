@@ -13,6 +13,11 @@ class EditClientForm(forms.ModelForm):
       model = Client
       # champs concernés par le formulaire
       fields = ["email", "mobile"]
+      # personnalisation de balise input des champs du formulaire, css, et attributs html
+      widgets = {
+         "email": forms.EmailInput(attrs={"class": "form-control", "placeholder": "me@example.com"}),
+         "mobile": forms.TextInput(attrs={"class": "form-control", "placeholder": "+ (...) 00 00 00 00"})
+      }
     
 
     ## validation custom

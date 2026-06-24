@@ -38,20 +38,20 @@
                          {% comment "formulaire simple" %}
                          {{ form.as_p }}
                          {% endcomment %}
-                         <p>
-                            <label for="{{ form.email.id_for_label }}">Email <span style="color: red">*</span></label>
+                         <div class="form-floating mb-3">
                             {{ form.email }}
+                            <label for="{{ form.email.id_for_label }}">Email <span style="color: red">*</span></label>
                             {% if form.email.errors %}
                             <div class="text-danger small mt-1"> {{form.email.errors}} </div>
                             {% endif %}
-                         <p>
-                         <p>
-                            <label for="{{ form.email.id_for_mobile }}">Mobile <span style="color: red">*</span></label>
+                        </div>
+                        <div class="form-floating mb-3">
                             {{ form.mobile }}
+                            <label for="{{ form.email.id_for_mobile }}">Mobile <span style="color: red">*</span></label>
                             {% if form.mobile.errors %}
                             <div class="text-danger small mt-1"> {{form.mobile.errors}} </div>
                             {% endif %}
-                         <p>
+                         </div>
                         <div class="d-grid">
                             <button class="btn btn-primary btn-lg" type="submit">Save Changes</button>
                         </div>
