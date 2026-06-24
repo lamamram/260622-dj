@@ -45,7 +45,7 @@
                     </div>
                 </div>
                 <div class="text-center mt-3">
-                    ??? redirection
+                    back to home
                 </div>
             </div>
         </div>
@@ -57,7 +57,7 @@
 
 * `./forms.py`: utilisation d'une sous classe Meta
 * vue avec formulaire:
-  - distinguer le traitement du formulaire (POST) et l'affichage du formulaire (GET)
+  - distinguer le traitement du formulaire **(POST)** et l'affichage du formulaire **(GET)**
   - traiter le forumlaire verifier l'adéquation des données POST avec les contraintes du modèle et les contraintes de validation du formulaire => `form.is_valid()`
   - utiliser `redirect(to=<url>)` pour redirection
 * template avec formulaire:
@@ -86,7 +86,7 @@
 1. esthétique
   * `{{ form.as_p }}` pour afficher les champs du formulaire avec des balises `<p>
   * `{{ form.as_table }}` pour afficher les champs du formulaire avec des balises `<tr>`
-  * `{{ form.as_ul }}` pour afficher les champs du formulaire avec des balises `<li>`
+  * `{{ form.as_ul }}` pour afficher les champs du formulaire avec des listes `<li>`
 
 2. validation côté serveur
    * les champs des modèles contiennent des contraintes de validation **générale** 
@@ -102,5 +102,8 @@
     * on peut également surcharger une méthode `clean()` pour valider des contraintes de validation **sur plusieurs champs à la fois** 
       - ex: *mdp et confirmation du mdp*" 
       - peut utilise des méthodes de validation de django comme `validate_slug`, `validate_odd`, etc.
+
+
+![width:600px](./images/model-form.png)
    
    
