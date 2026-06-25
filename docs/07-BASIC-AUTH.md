@@ -39,3 +39,32 @@ sinon:
 2. pour les vues basées sur les classes => le mixin `LoginRequiredMixin` (avec `login_url` si besoin) idem
 
 3. rediriger la page de login si l'utilisateur est déjà connecté (ex: page de login, page d'inscription, ...)
+
+## 6. relation OneToOne entre User et Client
+
+```python
+# models.py
+class Client(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+    # REM: null=True transitoire pour ne pas casser la base de données existante, à supprimer après migration
+```
+
+```bash
+uv run pythin manage.py makemigrations
+uv run python manage.py migrate
+
+sqlit
+```
+
+```sql
+UPDATE client_client SET user_id = 2 WHERE id = 1;
+```
+
+```python
+# views.py
+@login_required(login_url='/login')
+def home(request):
+    # récupérer le client lié à l'utilisateur connecté
+    client = Client.objects.get(user=request.user)
+    return render(request, 'home.html', {'client': client})
+```
