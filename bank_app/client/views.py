@@ -48,12 +48,16 @@ def log(request: HttpRequest):
 
 @login_required(login_url="/login")
 def home(request: HttpRequest):
-    # accès statique (pas d'instanciation) avec l'attribut .objects
+    # accès statique (pas d'instanciation: Client()), avec l'attribut .objects
     # qui contient les méthodes de requêtages sur la table
     # pk = Primary Key (clé primaire) ==> id
     # techniques de requêtages (.get(id=1), .get(pk=1), first(), all() , filter())
+    # client = Client.objects.get(pk=1)
+
+    # client lié à l'utilisateurauthentifié
     client = Client.objects.filter(user=request.user).first()
     logger.info(f"donées client :{client}")
+    
     # 1. créer le sous dossier templates dans l'app client et y insérer home.html
     # 2. ajouter le contexte pour injecter les objets python dans le template
     return render(request, "home.html", context={
@@ -63,7 +67,7 @@ def home(request: HttpRequest):
 
 @login_required(login_url="/login")
 def edit_client(request: HttpRequest):
-    client = Client.objects.get(pk=1)
+    client = Client.objects.filter(user=request.user)
     # si le formulaire est validé (requête HTTP POST/PUT/PATCH)
     if request.method == "POST":
         form = EditClientForm(
@@ -94,7 +98,8 @@ def list_accounts(request: HttpRequest):
     
     ## CAS 2: 1 requête avec JOIN ~28ms
     # select_related pour les relations X -> ONE
-    accounts = Account.objects.select_related("client").filter(client_id=1)
+    client = Client.objects.filter(user=request.user)
+    accounts = Account.objects.select_related("client").filter(client=client)
     print("ok")
     ## CAS 3: 2 requêtes mais batchées avec Where IN => ~60ms
     # prefetch_related pour les relation X -> MANY
@@ -142,7 +147,7 @@ class ClientUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
     def get_object(self, queryset = ...):
         """
-        méthode caractéristique d'une vue qui a besoin d'un objet (pk)
+        méthode caractéristique d'une vue qui a besoin d'un objet
         ici surcharge: comportement arbitraire
         """
-        return Client.objects.get(pk=1)
+        return Client.objects.filter(user=self.request.user).first()

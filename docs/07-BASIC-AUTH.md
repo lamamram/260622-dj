@@ -68,3 +68,5 @@ def home(request):
     client = Client.objects.get(user=request.user)
     return render(request, 'home.html', {'client': client})
 ```
+
+![](./images/auth.png)
