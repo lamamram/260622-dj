@@ -4,6 +4,11 @@ from django.core.validators import RegexValidator
 from django.core.exceptions import ValidationError
 import re
 
+
+class LoginForm(forms.Form):
+    username = forms.CharField(max_length=100)
+    password = forms.CharField(max_length=50)
+
 MOBILE_REGEX = r"^\+?[\d\s\-().]{6,20}$"
 MOBILE_MSG = "Enter a valid mobile (digits, spaces, +, -, ())."
 

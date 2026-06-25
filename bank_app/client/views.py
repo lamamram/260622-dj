@@ -6,14 +6,32 @@ from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import ListView, DetailView, UpdateView
 from django.urls import reverse_lazy, reverse
+from django.contrib.auth import authenticate, login
+from .forms import LoginForm
 
 import logging
 
 logger = logging.getLogger("django")
 
 
-def login(request: HttpRequest):
-    return render(request, "login.html", {})
+def log(request: HttpRequest):
+    if request.method == "POST":
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            user = authenticate(
+                request, 
+                username=form.cleaned_data["username"],
+                password=form.cleaned_data["password"]
+            )
+            if user is not None:
+                return redirect("home")
+            else:
+                return render(request, "login.html", {"form": form})
+        else:
+            return render(request, "login.html", {"form": form})
+    else:
+        form = LoginForm()
+        return render(request, "login.html", {"form": form})
 
 # Create your views here.
 # première vue : vue-fonction
