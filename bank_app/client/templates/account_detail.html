@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Bank App - account: {{ account.number }}{% endblock  %}
+{% block header %}
+<!-- Header-->
+    <header class="py-5 bg-light border-bottom mb-4">
+        <div class="container px-5">
+            <h1 class="fw-bolder">{{ account.number }}</h1>
+        </div>
+    </header>
+{% endblock %}
+{% block content %}
+<!-- Edit form section -->
+<section class="bg-light py-5">
+    <div class="container px-5 my-5">
+        <div class="card">
+            <div class="card-body">
+                <dl class="row mb-0">
+
+                    <dt class="col-sm-3">Type</dt>
+                    <dd class="col-sm-9">{{ account.type }}</dd>
+
+                    <dt class="col-sm-3">Balance</dt>
+                    <dd class="col-sm-9">{{ account.balance}}</dd>
+
+                    <dt class="col-sm-3">Overdraft</dt>
+                    <dd class="col-sm-9">{{ account.overdraft }}</dd>
+
+                    <dt class="col-sm-3">Credit Rate</dt>
+                    <dd class="col-sm-9">{{ account.credit_rate }}</dd>
+
+                </dl>
+                <a href="{% url 'list_accounts' %}" class="btn btn-secondary">Back to Accounts</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock  %}

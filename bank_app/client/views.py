@@ -3,7 +3,7 @@ from .models import Client, Account
 from .forms import EditClientForm
 from django.http import HttpRequest
 from django.contrib import messages
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 
 # Create your views here.
@@ -74,4 +74,11 @@ def list_accounts(request: HttpRequest):
 class AccountsListView(ListView):
     model = Account
     template_name = "list_accounts.html"
+    # variable caractéristique d'une liste == la collection d' accounts DONC on l'appelle accounts
     context_object_name = "accounts"
+
+class AccountDetailView(DetailView):
+    model = Account
+    template_name = "account_detail.html"
+    # variable caractéristique d'une fiche == un objet account DONC on l'appelle account
+    context_object_name = "account"

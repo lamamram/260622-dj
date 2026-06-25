@@ -8,5 +8,7 @@ urlpatterns = [
     path("home", views.home, name="home"),
     path("home/edit_client", views.edit_client, name="edit_client"),
                               # class.as_view() -> function
-    path("home/list_accounts", views.AccountsListView.as_view(), name="list_accounts")
+    path("home/list_accounts", views.AccountsListView.as_view(), name="list_accounts"),
+    # ------------------------<type:var> var vient d'un template
+    path("home/accounts_detail/<int:pk>", views.AccountDetailView.as_view(), name="account_detail")
 ]
