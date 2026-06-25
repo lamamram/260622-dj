@@ -3,6 +3,8 @@ from .models import Client, Account
 from .forms import EditClientForm
 from django.http import HttpRequest
 from django.contrib import messages
+from django.views.generic import ListView
+
 
 # Create your views here.
 # première vue : vue-fonction
@@ -51,7 +53,7 @@ def list_accounts(request: HttpRequest):
     ## CAS 2: 1 requête avec JOIN ~28ms
     # select_related pour les relations X -> ONE
     accounts = Account.objects.select_related("client").filter(client_id=1)
-
+    print("ok")
     ## CAS 3: 2 requêtes mais batchées avec Where IN => ~60ms
     # prefetch_related pour les relation X -> MANY
     # client = Client.objects.prefetch_related("accounts").get(pk=1) # 2 requêtes batchées
@@ -68,3 +70,8 @@ def list_accounts(request: HttpRequest):
 
     
     return render(request, "list_accounts.html", {"accounts": accounts})
+
+class AccountsListView(ListView):
+    model = Account
+    template_name = "list_accounts.html"
+    context_object_name = "accounts"

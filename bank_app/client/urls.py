@@ -7,5 +7,6 @@ urlpatterns = [
     # charger la vue qui est une fonction dans le module views
     path("home", views.home, name="home"),
     path("home/edit_client", views.edit_client, name="edit_client"),
-    path("home/list_accounts", views.list_accounts, name="list_accounts")
+                              # class.as_view() -> function
+    path("home/list_accounts", views.AccountsListView.as_view(), name="list_accounts")
 ]
