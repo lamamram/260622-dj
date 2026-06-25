@@ -17,10 +17,11 @@ Including another URLconf
 from django.contrib import admin
 # importer include pour importer un chemin python en str à partir de la racine
 from django.urls import path, include
+from debug_toolbar.toolbar import debug_toolbar_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     # chemins de l'application client: chemin dans l'url, chemin python vers les urls de l'application
     path("", include("bank_app.client.urls"))
     # path("manager/")
-]
+] + debug_toolbar_urls()

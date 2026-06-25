@@ -35,14 +35,15 @@
 * Lazy/Eager loading
   - par défaut, django ne charge pas les relations, en créant l'objet client
   - en demandant tous les comptes d'un client, django va lancer une requête SQL pour aller chercher les comptes
-  - dans une boucle for, on aura autant de requêtes SQL que d'itérations => problème de performance
+  - dans une boucle for, on aura autant de requêtes SQL que d'itérations => problème de performance (N+1 requêtes)
 
   ```python
   client = Client.objects.get(pk=1) # 1 requête
-  accounts = client.accounts.all()  # lazy loading : requête(s)
-  # ...
-  # client.Client.objects.select_related('accounts').all()  # eager loading : 1 requête avec les relations 
+  accounts = client.accounts.all()  # lazy loading : 1 requête supplémentaire
   ```
+
+  - l'eager loading `Account.objects.select_related('client')` permet de charger les relations en une seule requête SQL
+  - :warn: `Client.objects.prefetch_related('accounts')` ne fonctionne pas pour les relations Many to One, il faut utiliser `select_related` pour ce cas
 
 ## vue list_accounts
 

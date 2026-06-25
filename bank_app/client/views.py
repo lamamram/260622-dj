@@ -37,15 +37,26 @@ def edit_client(request: HttpRequest):
             return redirect(to="home")
         else:
             messages.error(request, "checker les erreurs ci-dessous")
+    # méthode HTTP GET
     else:
         form = EditClientForm(instance=client)
     return render(request, "edit_client.html", {"form": form})
 
-
-    # si on vient de la page d'accueil
-
 def list_accounts(request: HttpRequest):
+    ## CAS 1: lazy loading: 2 requêtes avec Where =
     client = Client.objects.get(pk=1)
     accounts = client.accounts.all() # <= .accounts vient du "related_name" de la FK du modèle
     # accounts = Account.objects.filter(client=client)
+    
+    ## CAS 2: 1 requête avec JOIN
+    # select_related pour les relations X -> ONE
+    # accounts = Account.objects.select_related("client").filter(client_id=1)
+
+    ## CAS 3: 2 requêtes mais batchées avec Where IN
+    # prefetch_related pour les relation X -> MANY
+    # client = Client.objects.prefetch_related("accounts").get(pk=1) # 2 requêtes batchées
+    # accounts = client.accounts.all() # <= pas de requêtes
+    
+    
+    
     return render(request, "list_accounts.html", {"accounts": accounts})
