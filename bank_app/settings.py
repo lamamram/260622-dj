@@ -144,6 +144,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+# constante pour la debug_toolbar
 INTERNAL_IPS = [
     # ...
     "127.0.0.1",
