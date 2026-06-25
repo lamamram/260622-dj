@@ -3,6 +3,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    path("login", views.login, name="login"),
     # chemin relatif à partir du radical de l'app client
     # charger la vue qui est une fonction dans le module views
     path("home", views.home, name="home"),

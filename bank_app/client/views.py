@@ -11,6 +11,10 @@ import logging
 
 logger = logging.getLogger("django")
 
+
+def login(request: HttpRequest):
+    return render(request, "login.html", {})
+
 # Create your views here.
 # première vue : vue-fonction
 def home(request: HttpRequest):
