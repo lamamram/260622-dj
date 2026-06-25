@@ -17,17 +17,19 @@
                 <dl class="row mb-0">
 
                     <dt class="col-sm-3">Type</dt>
-                    <dd class="col-sm-9">{{ account.type }}</dd>
+                    <!-- avec un champs truc TextChoices: .truc => la clé, .get_truc_display => la valeur --> 
+                    <dd class="col-sm-9">{{ account.get_type_display }}</dd>
 
                     <dt class="col-sm-3">Balance</dt>
                     <dd class="col-sm-9">{{ account.balance}}</dd>
 
+                    {% if account.type == "current" %}
                     <dt class="col-sm-3">Overdraft</dt>
                     <dd class="col-sm-9">{{ account.overdraft }}</dd>
-
+                    {% else %}
                     <dt class="col-sm-3">Credit Rate</dt>
                     <dd class="col-sm-9">{{ account.credit_rate }}</dd>
-
+                    {% endif %}
                 </dl>
                 <a href="{% url 'list_accounts' %}" class="btn btn-secondary">Back to Accounts</a>
             </div>
