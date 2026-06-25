@@ -53,6 +53,11 @@ LOGGING = {
     },
 ## stockage de log
     "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+            "level": "INFO",
+            "formatter": "verbose"
+        },
         "file": {
             "level": "DEBUG",
             "class": "logging.FileHandler",
@@ -65,7 +70,7 @@ LOGGING = {
 ## config de la collecte de logs
     "loggers": {
         "django": {
-            "handlers": ["file"],
+            "handlers": ["console", "file"],
             # niveau minimum 
             "level": "INFO",
             # rend les prints dans la console
