@@ -3,7 +3,9 @@ from .models import Client, Account
 from .forms import EditClientForm
 from django.http import HttpRequest
 from django.contrib import messages
-from django.views.generic import ListView, DetailView
+from django.contrib.messages.views import SuccessMessageMixin
+from django.views.generic import ListView, DetailView, UpdateView
+from django.urls import reverse_lazy, reverse
 
 
 # Create your views here.
@@ -82,3 +84,21 @@ class AccountDetailView(DetailView):
     template_name = "account_detail.html"
     # variable caractéristique d'une fiche == un objet account DONC on l'appelle account
     context_object_name = "account"
+
+class ClientUpdateView(SuccessMessageMixin, UpdateView):
+    model = Client
+    form_class = EditClientForm
+    template_name = "edit_client.html"
+    # redirection en cas de succès
+    success_url = reverse_lazy("home")
+    # champs injecté à partir de la Mixin qui gère les messages Flash pour les CBV
+    success_message = 'List successfully saved!!!!'
+    # ici on a pas d'identifiant venant de l'url et pas d'authentification
+    # context_object_name = 'client'
+
+    def get_object(self, queryset = ...):
+        """
+        méthode caractéristique d'une vue qui a besoin d'un objet (pk)
+        ici surcharge: comportement arbitraire
+        """
+        return Client.objects.get(pk=1)

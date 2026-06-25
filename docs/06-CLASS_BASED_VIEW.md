@@ -66,3 +66,28 @@ class TrucDetailView(DetailView):
     </div>
 </div>
 ```
+
+### UpdateView
+
+
+
+```python
+from django.views.generic import UpdateView
+from django.contrib.messages.views import SuccessMessageMixin
+
+
+class TrucUpdateView(SuccessMessageMixin, UpdateView):
+    """
+    notion de Mixin: objet qui ajoute des fonctionnalités à une classe existante
+    ajoutée par héritage multiple en association avec la classe UpdateView
+    """
+    model = Truc
+    form_class = TrucForm
+    template_name = 'truc_update.html'
+    # fields si le formulaire ne les définit pas déjà
+    # fields = ['name', 'type', 'number', 'balance', 'overdraft', 'credit_rate', ...]
+
+    ## champs injecté depuis la mixin SuccessMessageMixin
+    success_message = 'List successfully saved!!!!'
+    success_url = reverse_lazy('truc_list')
+```
