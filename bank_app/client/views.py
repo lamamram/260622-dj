@@ -4,17 +4,26 @@ from .forms import EditClientForm
 from django.http import HttpRequest
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, UpdateView
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth import authenticate, login
 from .forms import LoginForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 
 import logging
 
 logger = logging.getLogger("django")
 
+def log_out(request: HttpRequest):
+    logout(request)
+    return redirect("login")
+
 
 def log(request: HttpRequest):
+    if request.user.is_authenticated:
+        return redirect("home")
     if request.method == "POST":
         form = LoginForm(request.POST)
         if form.is_valid():
@@ -24,6 +33,7 @@ def log(request: HttpRequest):
                 password=form.cleaned_data["password"]
             )
             if user is not None:
+                login(request, user)
                 return redirect("home")
             else:
                 return render(request, "login.html", {"form": form})
@@ -35,12 +45,14 @@ def log(request: HttpRequest):
 
 # Create your views here.
 # première vue : vue-fonction
+
+@login_required(login_url="/login")
 def home(request: HttpRequest):
     # accès statique (pas d'instanciation) avec l'attribut .objects
     # qui contient les méthodes de requêtages sur la table
     # pk = Primary Key (clé primaire) ==> id
     # techniques de requêtages (.get(id=1), .get(pk=1), first(), all() , filter())
-    client = Client.objects.get(pk=1)
+    client = Client.objects.filter(user=request.user).first()
     logger.info(f"donées client :{client}")
     # 1. créer le sous dossier templates dans l'app client et y insérer home.html
     # 2. ajouter le contexte pour injecter les objets python dans le template
@@ -49,6 +61,7 @@ def home(request: HttpRequest):
         "client": client
     })
 
+@login_required(login_url="/login")
 def edit_client(request: HttpRequest):
     client = Client.objects.get(pk=1)
     # si le formulaire est validé (requête HTTP POST/PUT/PATCH)
@@ -72,6 +85,7 @@ def edit_client(request: HttpRequest):
         form = EditClientForm(instance=client)
     return render(request, "edit_client.html", {"form": form})
 
+@login_required(login_url="/login")
 def list_accounts(request: HttpRequest):
     ## CAS 1: lazy loading: 2 requêtes avec Where = ~60ms
     # client = Client.objects.get(pk=1)
@@ -99,20 +113,24 @@ def list_accounts(request: HttpRequest):
     
     return render(request, "list_accounts.html", {"accounts": accounts})
 
-class AccountsListView(ListView):
+class AccountsListView(LoginRequiredMixin, ListView):
     model = Account
+    # attribut lié à la mixin
+    login_url = "/login"
     template_name = "list_accounts.html"
     # variable caractéristique d'une liste == la collection d' accounts DONC on l'appelle accounts
     context_object_name = "accounts"
 
-class AccountDetailView(DetailView):
+class AccountDetailView(LoginRequiredMixin, DetailView):
     model = Account
+    login_url = "/login"
     template_name = "account_detail.html"
     # variable caractéristique d'une fiche == un objet account DONC on l'appelle account
     context_object_name = "account"
 
-class ClientUpdateView(SuccessMessageMixin, UpdateView):
+class ClientUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Client
+    login_url = "/login"
     form_class = EditClientForm
     template_name = "edit_client.html"
     # redirection en cas de succès

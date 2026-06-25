@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models.functions import Now
+from django.contrib.auth.models import User
 
 # modèle ==> représentation d'un objet métier qui contient des règle métier
 # modèle ==> peut être traduit en structure de données (ici table relationnelle)
@@ -15,6 +16,9 @@ class Client(models.Model):
     # REM default vs db_default: default est créé par Django, 
     # pour sqlite: db_default=Now() déléguer la valeur par défaut à la bdd 
     created_at = models.DateTimeField(db_default=Now())
+
+    # relation ONE TO ONE
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         """ conversion d'un objet Client en str """
