@@ -7,6 +7,9 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import ListView, DetailView, UpdateView
 from django.urls import reverse_lazy, reverse
 
+import logging
+
+logger = logging.getLogger("django")
 
 # Create your views here.
 # première vue : vue-fonction
@@ -16,6 +19,7 @@ def home(request: HttpRequest):
     # pk = Primary Key (clé primaire) ==> id
     # techniques de requêtages (.get(id=1), .get(pk=1), first(), all() , filter())
     client = Client.objects.get(pk=1)
+    logger.info(f"donées client :{client}")
     # 1. créer le sous dossier templates dans l'app client et y insérer home.html
     # 2. ajouter le contexte pour injecter les objets python dans le template
     return render(request, "home.html", context={

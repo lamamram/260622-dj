@@ -45,6 +45,12 @@ INSTALLED_APPS = [
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": "{levelname} | {asctime} | {module}: L {lineno}  | {message}",
+            "style": "{",
+        },
+    },
 ## stockage de log
     "handlers": {
         "file": {
@@ -52,6 +58,8 @@ LOGGING = {
             "class": "logging.FileHandler",
             # chemin du fichier de log
             "filename": "debug.log",
+            'encoding':'utf8',
+            'formatter': 'verbose'
         },
     },
 ## config de la collecte de logs
@@ -59,7 +67,7 @@ LOGGING = {
         "django": {
             "handlers": ["file"],
             # niveau minimum 
-            "level": "DEBUG",
+            "level": "INFO",
             # rend les prints dans la console
             "propagate": True,
         },
@@ -144,9 +152,26 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-# constante pour la debug_toolbar
+# constantes pour la debug_toolbar
+
 INTERNAL_IPS = [
     # ...
     "127.0.0.1",
     # ...
+]
+
+DEBUG_TOOLBAR_PANELS = [
+    'debug_toolbar.panels.history.HistoryPanel',
+    'debug_toolbar.panels.versions.VersionsPanel',
+    'debug_toolbar.panels.timer.TimerPanel',
+    'debug_toolbar.panels.settings.SettingsPanel',
+    'debug_toolbar.panels.headers.HeadersPanel',
+    'debug_toolbar.panels.request.RequestPanel',
+    'debug_toolbar.panels.sql.SQLPanel',
+    'debug_toolbar.panels.staticfiles.StaticFilesPanel',
+    'debug_toolbar.panels.templates.TemplatesPanel',
+    'debug_toolbar.panels.alerts.AlertsPanel',
+    'debug_toolbar.panels.cache.CachePanel',
+    'debug_toolbar.panels.signals.SignalsPanel',
+    'debug_toolbar.panels.community.CommunityPanel'
 ]
