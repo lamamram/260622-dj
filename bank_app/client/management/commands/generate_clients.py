@@ -23,4 +23,29 @@ class Command(BaseCommand):
     @transaction.atomic
     def handle(self, *args, **options):
         number = options["number"]
-        print(number)
+        # group = Group.objects.get(name="client")
+        group, _ = Group.objects.get_or_create(name="client")
+        print(group.name)
+
+        fake = Faker("fr_FR")
+
+        # for _ in range(number):
+        self._create_client(fake, group)
+    
+    def _create_client(self, fake: Faker, group: Group):
+        firstname = fake.first_name()
+        lastname = fake.last_name()
+        username = fake.unique.user_name()
+        password  = "password"
+        email = fake.unique.email()
+
+        # Truc.objects est le Manager du modèle
+        user = User.objects.create_user(
+            username, 
+            email, 
+            password,
+            first_name=firstname,
+            last_name=lastname
+        )
+        # ajouter le nouvel utilisateur au groupe client
+        user.groups.add(group)
