@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+
 {% block title %}Bank App - edit client{% endblock  %}
 {% block header %}
 
@@ -32,18 +33,25 @@
                          {{ form.as_p }}
                          {% endcomment %}
                         <div class="form-floating mb-3">
+                            {% with field=form.email %}
+                              {% include "partial_form_field.html#form-field" %}
+                            {% endwith %}
+                            {% comment %} 
                             {{ form.email }}
                             <label for="{{ form.email.id_for_label }}">Email <span style="color: red">*</span></label>
                             {% if form.email.errors %}
                             <div class="text-danger small mt-1"> {{form.email.errors}} </div>
-                            {% endif %}
+                            {% endif %} {% endcomment %}
                         </div>
                         <div class="form-floating mb-3">
-                            {{ form.mobile }}
-                            <label for="{{ form.email.id_for_mobile }}">Mobile <span style="color: red">*</span></label>
+                            {% with field=form.mobile %}
+                              {% include "partial_form_field.html#form-field" %}
+                            {% endwith %}
+                            {% comment %} {{ form.mobile }}
+                            <label for="{{ form.mobile.id_for_mobile }}">Mobile <span style="color: red">*</span></label>
                             {% if form.mobile.errors %}
                             <div class="text-danger small mt-1"> {{form.mobile.errors}} </div>
-                            {% endif %}
+                            {% endif %} {% endcomment %}
                          </div>
                         <div class="d-grid">
                             <button class="btn btn-primary btn-lg" type="submit">Save Changes</button>

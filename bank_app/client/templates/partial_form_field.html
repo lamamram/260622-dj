@@ -1,0 +1,7 @@
+{% partialdef form-field %}
+{{ field }}
+<label for="{{ field.id_for_label }}">{{field.id_for_label | slice:"3:" | capfirst }}<span style="color: red">*</span></label>
+{% if field.errors %}
+<div class="text-danger small mt-1"> {{field.errors}} </div>
+{% endif %}
+{% endpartialdef form-field %}
