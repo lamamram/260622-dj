@@ -84,3 +84,18 @@ class Command(BaseCommand):
   - https://docs.djangoproject.com/en/6.0/ref/contrib/auth/
 * créer (et insérer dans la bd) les autres modèles à partir d'objets Client.objects.???
 * exécuter command : `python manage.py ma_commande ?`
+
+#### créer un objet en django
+
+* créer un modèle python (sans référence à un enregistrement de table)
+  - user = User(firstname=f, lastname=l, ...)
+  - dans ce cas il nous faut faire user.save() pour synchroniser
+
+* créer le modèle avec réf à la table
+  - user = User.objects.create_user(...)
+
+#### gestion des transaction
+
+* `transaction.atomic` ==> tout est ok ou ERROR
+* `transaction.non_atomic_requests` ==> je peux commiter et rollback ce que je veux 
+* en sqlite: gestion des transaction  est hasardeuse: mieux raise une erreur
