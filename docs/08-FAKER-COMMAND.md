@@ -83,4 +83,4 @@ class Command(BaseCommand):
 * les modèles User et Group pour créer les utilisateur de groupe client
   - https://docs.djangoproject.com/en/6.0/ref/contrib/auth/
 * créer (et insérer dans la bd) les autres modèles à partir d'objets Client.objects.???
-* exécuter command : `python manage.py ma_commande --option ?`
+* exécuter command : `python manage.py ma_commande ?`
