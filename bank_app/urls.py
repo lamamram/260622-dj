@@ -23,5 +23,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # chemins de l'application client: chemin dans l'url, chemin python vers les urls de l'application
     path("", include("bank_app.client.urls")),
-    #path("manager/", include("bank_app.manager.urls"))
+    path("manager/", include("bank_app.manager.urls"))
 ] + debug_toolbar_urls()

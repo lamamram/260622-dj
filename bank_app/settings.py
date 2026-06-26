@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     ## déclaration des applications que le projet utilisent
     "debug_toolbar",
-    'bank_app.client'
+    'bank_app.client',
+    'bank_app.manager'
 ]
 
 LOGGING = {

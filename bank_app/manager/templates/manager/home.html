@@ -1,0 +1,110 @@
+{% extends "manager/base.html" %}
+{% block title %}Bank App Manager - Home{% endblock  %}
+{% block header %}
+        <!-- Header-->
+        <header class="bg-secondary py-5">
+            <div class="container px-5">
+                <!-- Flash messages -->
+                {% if messages %}
+                <div class="container px-5 mt-4">
+                    {% for message in messages %}
+                    <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                <div class="row gx-5 justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="text-center my-5">
+                            <h1 class="display-5 fw-bolder text-white mb-2">Welcome to Bank App Manager</h1>
+                            <p class="lead text-white-50 mb-4">
+                                <strong> {{ user }} </strong> <br>
+                                Email: {{ user.email }} <br>
+                            </p>
+                            <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
+                                <a class="btn btn-primary btn-lg px-4 me-sm-3" href="#features">Get Started</a>
+                                <a class="btn btn-outline-light btn-lg px-4" href="#!">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+{% endblock  %}
+{% block content %}
+        <!-- Statistiques manager -->
+        <section class="py-5 border-bottom bg-light">
+            <div class="container px-5 my-5">
+                <h2 class="h4 fw-bolder mb-4">Statistiques</h2>
+                <div class="row gx-4">
+                    <div class="col-md-6 mb-4 mb-md-0">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h3 class="h6 text-muted">Meilleur acheteur — juin 2026</h3>
+                                {% if top_buyer %}
+                                <p class="mb-0">
+                                    <strong>{{ top_buyer }}</strong> a acheté pour
+                                    <strong>{{ top_buyer.total_achats }} €</strong>.
+                                </p>
+                                {% else %}
+                                <p class="mb-0 text-muted">Aucun achat sur la période.</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h3 class="h6 text-muted">Fonds disponibles les plus élevés</h3>
+                                {% if top_funds %}
+                                <p class="mb-0">
+                                    <strong>{{ top_funds }}</strong> dispose de
+                                    <strong>{{ top_funds.solde_disponible }} €</strong>
+                                    (solde + découvert autorisé).
+                                </p>
+                                {% else %}
+                                <p class="mb-0 text-muted">Aucun compte.</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Features section-->
+        <section class="py-5 border-bottom" id="features">
+            <div class="container px-5 my-5">
+                <div class="row gx-5">
+                    <div class="col-lg-4 mb-5 mb-lg-0">
+                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-wallet2"></i></div>
+                        <h2 class="h4 fw-bolder">Account Management</h2>
+                        <p>Easily manage your bank accounts, view balances, and track your financial activity all in one place.</p>
+                        <a class="text-decoration-none" href="#!">
+                            Open an account
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="col-lg-4 mb-5 mb-lg-0">
+                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-arrow-left-right"></i></div>
+                        <h2 class="h4 fw-bolder">Transfers &amp; Payments</h2>
+                        <p>Send money, pay bills, and make transfers quickly and securely with our intuitive banking tools.</p>
+                        <a class="text-decoration-none" href="#!">
+                            Make a transfer
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-shield-lock"></i></div>
+                        <h2 class="h4 fw-bolder">Secure Banking</h2>
+                        <p>Your security is our top priority. We use industry-leading encryption to keep your data and funds safe.</p>
+                        <a class="text-decoration-none" href="#!">
+                            Learn about security
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+{% endblock  %}
