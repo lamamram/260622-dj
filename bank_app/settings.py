@@ -15,6 +15,8 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+ENCODING = 'utf8'
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
@@ -26,7 +28,6 @@ SECRET_KEY = 'django-insecure-hkm#!e88%8ew__4l9(!qlh5o2$wko469j62vh901nukf5)i6oa
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -63,7 +64,7 @@ LOGGING = {
             "class": "logging.FileHandler",
             # chemin du fichier de log
             "filename": "debug.log",
-            'encoding':'utf8',
+            'encoding':ENCODING,
             'formatter': 'verbose'
         },
     },

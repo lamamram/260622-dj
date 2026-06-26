@@ -7,10 +7,9 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, UpdateView
 from django.urls import reverse_lazy, reverse
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from .forms import LoginForm
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import logout
 
 import logging
 
@@ -100,7 +99,6 @@ def list_accounts(request: HttpRequest):
     # select_related pour les relations X -> ONE
     client = Client.objects.filter(user=request.user)
     accounts = Account.objects.select_related("client").filter(client=client)
-    print("ok")
     ## CAS 3: 2 requêtes mais batchées avec Where IN => ~60ms
     # prefetch_related pour les relation X -> MANY
     # client = Client.objects.prefetch_related("accounts").get(pk=1) # 2 requêtes batchées
