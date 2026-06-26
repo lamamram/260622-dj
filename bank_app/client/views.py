@@ -124,6 +124,19 @@ class AccountsListView(LoginRequiredMixin, ListView):
     # variable caractéristique d'une liste == la collection d' accounts DONC on l'appelle accounts
     context_object_name = "accounts"
 
+    def get_queryset(self):
+        """
+        méthode qui retourne la liste d'objet qu'on veut voir
+        liste d'objets == queryset
+        """
+        # client = Client.objects.filter(user=self.request.user).first()
+        # client = Client.objects.get(user_id=self.request.user.id)
+        # return Account.objects.filter(client=client)
+
+        # jointure de champs: je filtre la list de compte selon à la FK de client elle même en relation avec Account
+        # en SQL : double joiture account <-> client <-> user
+        return Account.objects.filter(client__user=self.request.user)
+
 class AccountDetailView(LoginRequiredMixin, DetailView):
     model = Account
     login_url = "/login"
