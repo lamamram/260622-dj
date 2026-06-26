@@ -34,6 +34,48 @@
                 <a href="{% url 'list_accounts' %}" class="btn btn-secondary">Back to Accounts</a>
             </div>
         </div>
+        <!-- Paiements -->
+        <div class="card mt-4">
+            <div class="card-body">
+                <h2 class="h5 mb-3">Paiements</h2>
+
+                <!-- Filtres par type -->
+                <div class="btn-group mb-3" role="group">
+                    <a href="?"
+                       class="btn btn-sm {% if not selected_type %}btn-primary{% else %}btn-outline-primary{% endif %}">Tous</a>
+                    {% for value, label in payment_types %}
+                    <a href="?type={{ value }}"
+                       class="btn btn-sm {% if selected_type == value %}btn-primary{% else %}btn-outline-primary{% endif %}">{{ label }}</a>
+                    {% endfor %}
+                </div>
+
+                <table class="table table-striped mb-0">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Type</th>
+                            <th>Référence</th>
+                            <th class="text-end">Montant</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for p in payments %}
+                        <tr>
+                            <td>{{ p.date|date:"d/m/Y H:i" }}</td>
+                            <td>{{ p.get_type_display }}</td>
+                            <td>{{ p.reference }}</td>
+                            <td class="text-end">{{ p.value }} €</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="4" class="text-center text-muted">Aucun paiement.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </section>
+
 {% endblock  %}

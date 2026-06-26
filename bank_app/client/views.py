@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Client, Account
+from .models import Client, Account, Payment
 from .forms import EditClientForm
 from django.http import HttpRequest
 from django.contrib import messages
@@ -10,6 +10,7 @@ from django.urls import reverse_lazy, reverse
 from django.contrib.auth import authenticate, login, logout
 from .forms import LoginForm
 from django.contrib.auth.decorators import login_required
+from typing import Any
 
 import logging
 
@@ -143,6 +144,36 @@ class AccountDetailView(LoginRequiredMixin, DetailView):
     template_name = "account_detail.html"
     # variable caractéristique d'une fiche == un objet account DONC on l'appelle account
     context_object_name = "account"
+
+    def get_context_data(self, **kwargs) -> dict[str, Any]:
+        """
+        cette méthode retourne le contexte de la vue
+        1/ le super retourne context["account"]
+        2/ on a utilise cette méthode car on ne peut pas directement utiliser account.payments
+           dans les templates car relation inverse
+        3/ self.object est l'objet account de cette vue
+           self.object.payments n'est pas une queryset<Payment> !!! c'est un objet de relation inverse Client.Payment.None
+           pour avoir la collection: le + simple: self.object.payments.all()
+           ou alors un tri
+        4/ le tri selon un champs .order_by("field") ou .order_by("-field") 
+        5/ utiliser la sousclasse Payment.Type dont les attributs sont des filtres naturels
+        """
+        # le super rapatrie l'objet account
+        context = super().get_context_data(**kwargs)
+
+        payments = self.object.payments.order_by("-date")
+        logger.info(self.object.payments)
+
+        selected_type = self.request.GET.get("type")
+        if selected_type:
+            payments = payments.filter(type=selected_type)
+
+        context["selected_type"] = selected_type
+        context["payment_types"] = Payment.Type.choices
+        context["payments"] = payments
+        return context
+    
+
 
 class ClientUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Client
